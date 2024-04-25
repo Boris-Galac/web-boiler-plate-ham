@@ -1,0 +1,116 @@
+.header {
+  background-color: var(--dark);
+  display: flex;
+  align-items: center;
+  padding-inline: 1rem;
+}
+.header__logo {
+  font-size: 2rem;
+  color: var(--white);
+}
+.nav {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+.nav[aria-expanded="true"] {
+  display: grid;
+  animation: nav-open 0.5s forwards;
+}
+@keyframes nav-open {
+  from {
+    opacity: 0;
+    pointer-events: none;
+  }
+  to {
+    opacity: 1;
+    pointer-events: visible;
+  }
+}
+.nav[aria-expanded="false"] {
+  animation: nav-closed 0.5s forwards;
+}
+@keyframes nav-closed {
+  from {
+    opacity: 1;
+    pointer-events: visible;
+  }
+  to {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10vh;
+}
+.nav__link {
+  color: var(--white);
+}
+.ham-btn {
+  position: relative;
+  aspect-ratio: 1;
+  width: 3.5rem;
+  margin-left: auto;
+  display: grid;
+  cursor: pointer;
+}
+.ham-line {
+  position: absolute;
+  height: 2px;
+  background-color: var(--white);
+  width: 90%;
+  margin-inline: auto;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transition: 0.4s;
+}
+
+.ham-btn[data-active="false"] .ham-line:nth-child(1) {
+  top: 16px;
+}
+.ham-btn[data-active="false"] .ham-line:nth-child(3) {
+  top: 40px;
+}
+.ham-btn[data-active="true"] .ham-line:nth-child(1) {
+  transform: rotate(45deg);
+  left: 3px;
+}
+.ham-btn[data-active="true"] .ham-line:nth-child(2) {
+  transform: translateX(50px);
+}
+.ham-btn[data-active="true"] .ham-line:nth-child(3) {
+  transform: rotate(-45deg);
+  left: 3px;
+}
+@media (min-width: 1152px) {
+  .nav {
+    position: static;
+    inset: unset;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    margin-inline: auto;
+  }
+  .nav__list {
+    flex-direction: row;
+    gap: 5vw;
+  }
+  .nav__link {
+    padding: 1.5rem;
+  }
+  .nav[aria-expanded="false"] {
+    opacity: 1;
+    pointer-events: visible;
+    animation: unset;
+  }
+  .ham-btn {
+    display: none;
+  }
+}
